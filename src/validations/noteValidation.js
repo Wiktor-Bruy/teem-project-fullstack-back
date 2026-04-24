@@ -10,9 +10,7 @@ export const updateNoteSchema = {
 };
 
 export const deleteNoteSchema = {
-  [Segments.PARAMS]: Joi.object({
-    noteId: Joi.string().min(3).required(),
-  }),
+  [Segments.PARAMS]: Joi.object({}),
 };
 
 export const getNoteSchema = {
