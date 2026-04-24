@@ -17,8 +17,8 @@ description :{
   trim : true,
 },
 date:{
-  type: String,
-default: () => new Date().toISOString().split('T')[0],
+  type: Number,
+   default: Date.now,
 },
   emotions :{
     type : [String],
