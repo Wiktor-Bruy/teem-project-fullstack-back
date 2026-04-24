@@ -4,11 +4,12 @@ import { GENDER } from '../constatnts/gender';
 
 const userScema = new Schema(
   {
-  username: { type: String, trim: true },
+  name: { type: String, trim: true },
    email: { type: String, unique: true, required: true, trim: true },
    password: { type: String, required: true },
-   data: { type: Number, required: true },
-   gender: { type: String, enum: GENDER},
+   gender: { type: String, enum: GENDER },
+   dueDate: { type: String, required: true },
+
    avatar: {
      type: String,
      required: false,
