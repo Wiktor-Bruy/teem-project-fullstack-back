@@ -8,7 +8,7 @@ const userScema = new Schema(
    email: { type: String, unique: true, required: true, trim: true },
    password: { type: String, required: true },
    gender: { type: String, enum: GENDER },
-   dueDate: { type: String, required: true },
+   dueDate: { type: String },
 
    avatar: {
      type: String,
