@@ -21,7 +21,7 @@ router.put(
   updateAvatar,
 );
 router.put(
-  '/uset/update',
+  '/user/update',
   authenticate,
   celebrate(updateUserSchema),
   updateUser,

@@ -5,5 +5,9 @@ export const getUserSchema = {
 };
 
 export const updateUserSchema = {
-  [Segments.BODY]: Joi.object({}),
+  [Segments.BODY]: Joi.object({
+    name: Joi.string().trim(),
+    gender: Joi.string(),
+    dueDate: Joi.string(),
+  }),
 };
