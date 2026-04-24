@@ -7,7 +7,7 @@ import {
   updateUserSchema,
 } from '../validations/userValidation.js';
 import { getUser } from '../controllers/user/getUser.js';
-import { authenticate } from '../middleware/authenticete.js';
+import { authenticate } from '../middleware/authenticate.js';
 import { updateAvatar } from '../controllers/user/updateAvatar.js';
 import { updateUser } from '../controllers/user/updateUser.js';
 

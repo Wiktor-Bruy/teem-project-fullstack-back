@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import { homePublic } from '../controllers/home/homePublic.js';
 import { homePrivate } from '../controllers/home/homePrivate.js';
-import { authenticate } from '../middleware/authenticete.js';
+import { authenticate } from '../middleware/authenticate.js';
 import { babyState } from '../controllers/home/babyState.js';
 import { momState } from '../controllers/home/momState.js';
 
