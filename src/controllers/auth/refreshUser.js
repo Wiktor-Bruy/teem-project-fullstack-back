@@ -1,54 +1,29 @@
-import jwt from "jsonwebtoken";
-import createHttpError from "http-errors";
-import { User } from "../../models/user.js";
-
-const JWT_SECRET = process.env.JWT_SECRET;
-const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET;
+import createHttpError from 'http-errors';
+import { Session } from '../../models/session.js';
+import { createSession, setSessionCookies } from '../../services/auth.js';
 
 export async function refreshUser(req, res, next) {
-  try {
-    const { refreshToken } = req.cookies;
-
-    if (!refreshToken) {
-      throw createHttpError(401, "Refresh token not found");
-    }
-
-    let decoded;
-
-    try {
-      decoded = jwt.verify(refreshToken, JWT_REFRESH_SECRET);
-    } catch (err) {
-      throw createHttpError(401, "Invalid refresh token");
-    }
-
-    const user = await User.findById(decoded.id);
-
-    if (!user) {
-      throw createHttpError(401, "User not found");
-    }
-
-    const newAccessToken = jwt.sign(
-      { id: user._id },
-      JWT_SECRET,
-      { expiresIn: "15m" }
-    );
-
-    const newRefreshToken = jwt.sign(
-      { id: user._id },
-      JWT_REFRESH_SECRET,
-      { expiresIn: "7d" }
-    );
-
-    res.cookie("refreshToken", newRefreshToken, {
-      httpOnly: true,
-      secure: false,
-      sameSite: "strict",
-    });
-
-    res.json({
-      accessToken: newAccessToken,
-    });
-  } catch (error) {
-    next(error);
+  const { refreshToken, sessionId } = req.cookies;
+  if (!refreshToken || !sessionId) {
+    throw createHttpError(401, 'Refresh token not found');
   }
+
+  const session = Session.findOne({ _id: sessionId, refreshToken });
+  if (!session) {
+    throw createHttpError(401, 'Session hot found');
+  }
+
+  const isInvalidToken = new Date() > new Date(session.refreshTokenValidUntil);
+  if (isInvalidToken) {
+    throw createHttpError(401, 'Session token expired');
+  }
+
+  await Session.deleteOne({
+    _id: req.cookies.sessionId,
+    refreshToken: req.cookies.refreshToken,
+  });
+  const newSession = await createSession(session.userId);
+  setSessionCookies(res, newSession);
+
+  res.status(200).json({ message: 'Session refreshed' });
 }
