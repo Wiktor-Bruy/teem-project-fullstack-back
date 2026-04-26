@@ -6,7 +6,7 @@ export async function homePublic(req, res) {
   const currentWeek = 1;
   const daysLeft = 294;
 
-  const baby = await BabyState.findOne({ weekNumber: 1 });
+  const baby = await BabyState.findOne({ weekNumber: currentWeek });
   if (!baby) {
     throw createHttpError(404, 'Baby state not found');
   }
@@ -16,18 +16,16 @@ export async function homePublic(req, res) {
   const image = baby.image;
   const babyActivity = baby.babyActivity;
   const babyDevelopment = baby.babyDevelopment;
-  const momDailyTips = baby.momDailyTips[0];
+  const momDailyTips = baby.momDailyTips?.[0] || 'Порада не знайдена';
 
-  res
-    .status(200)
-    .json(
-      currentWeek,
-      daysLeft,
-      babySize,
-      babyWeight,
-      image,
-      babyActivity,
-      babyDevelopment,
-      momDailyTips,
-    );
+  const babyState = {
+    babySize,
+    babyWeight,
+    image,
+    babyActivity,
+    babyDevelopment,
+    momDailyTips,
+  };
+
+  res.status(200).json({ currentWeek, daysLeft, babyState });
 }
