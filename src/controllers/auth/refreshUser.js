@@ -2,7 +2,7 @@ import createHttpError from 'http-errors';
 import { Session } from '../../models/session.js';
 import { createSession, setSessionCookies } from '../../services/auth.js';
 
-export async function refreshUser(req, res, next) {
+export async function refreshUser(req, res) {
   const { refreshToken, sessionId } = req.cookies;
   if (!refreshToken || !sessionId) {
     throw createHttpError(401, 'Refresh token not found');
