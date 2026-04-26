@@ -1,11 +1,16 @@
 import { Schema, model } from 'mongoose';
 
-const emotionScema = new Schema(
-  {},
+const emotionSchema = new Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
+  },
   {
     timestamps: true,
     versionKey: false,
   },
 );
 
-export const Emotion = model('Emotion', emotionScema);
+export const Emotion = model('Emotion', emotionSchema);
