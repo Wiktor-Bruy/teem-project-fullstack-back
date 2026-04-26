@@ -1,14 +1,1 @@
-import createHttpError from "http-errors";
-import { Note } from "../../models/note";
-
-export async function getNote(req, res) { 
-    const { noteId } = req.params;
-
-    const note = await Note.findById(noteId);
-
-    if (!note) {
-        throw createHttpError(404, "Note not found");
-    }
-
-    res.status(200).json(note);
-};
+export async function getNote(req, res) {}
