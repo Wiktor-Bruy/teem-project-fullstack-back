@@ -1,21 +1,49 @@
 import { Schema, model } from 'mongoose';
 
+const subFeelings = new Schema(
+  {
+    states: {
+      type: [String],
+      required: true,
+    },
+    sensationDescr: {
+      type: String,
+      required: true,
+    },
+  },
+  { timestamps: false, versionKey: false },
+);
+
+const subComfortTips = new Schema(
+  {
+    category: {
+      type: String,
+      required: true,
+    },
+    tip: {
+      type: String,
+      required: true,
+    },
+  },
+  { timestamps: false, versionKey: false },
+);
+
 const momStateSchema = new Schema(
   {
-    week: {
+    weekNumber: {
       type: Number,
       required: [true, 'Week is required'],
       min: [1, 'Week must be at least 1'],
-      max: [40, 'Week must be at most 40'],
+      max: [42, 'Week must be at most 40'],
       unique: true,
     },
     feelings: {
-      type: String,
+      type: subFeelings,
       required: [true, 'Feelings description is required'],
     },
-    tips: {
-      type: [String],
-      default: [],
+    comfortTips: {
+      type: [subComfortTips],
+      required: true,
     },
   },
   {
