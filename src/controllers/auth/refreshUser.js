@@ -8,7 +8,7 @@ export async function refreshUser(req, res) {
     throw createHttpError(401, 'Refresh token not found');
   }
 
-  const session = Session.findOne({ _id: sessionId, refreshToken });
+  const session = await Session.findOne({ _id: sessionId, refreshToken });
   if (!session) {
     throw createHttpError(401, 'Session hot found');
   }
@@ -19,10 +19,12 @@ export async function refreshUser(req, res) {
   }
 
   await Session.deleteOne({
-    _id: req.cookies.sessionId,
-    refreshToken: req.cookies.refreshToken,
+    _id: sessionId,
+    refreshToken,
   });
+
   const newSession = await createSession(session.userId);
+  console.log('session created');
   setSessionCookies(res, newSession);
 
   res.status(200).json({ message: 'Session refreshed' });
