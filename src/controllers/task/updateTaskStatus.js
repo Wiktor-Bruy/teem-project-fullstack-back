@@ -2,13 +2,13 @@ import { Task } from '../../models/task.js';
 
 export async function updateTaskStatus(req, res) {
   try {
-    const { id } = req.params;
+    const { taskId } = req.params;
     const { status } = req.body;
 
     const task = await Task.findOneAndUpdate(
-      { _id: id, owner: req.user._id },
+      { _id: taskId, owner: req.user._id },
       { status },
-      { new: true }
+      { returnDocument: 'after' },
     );
 
     if (!task) {
