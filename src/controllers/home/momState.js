@@ -1,3 +1,5 @@
+import createHttpError from 'http-errors';
+
 import MomState from '../models/MomState.js';
 
 export async function momState(req, res) {
@@ -8,19 +10,21 @@ export async function momState(req, res) {
 
     const msPerWeek = 1000 * 60 * 60 * 24 * 7;
     const weeksLeft = Math.ceil((due - today) / msPerWeek);
-    const weekNumber = 40 - weeksLeft;
-    if (weekNumber < 1 || weekNumber > 40) {
-      return res.status(400).json({ message: 'Невірна дата пологів або вагітність вже завершена' });
+    const weekNumber = 42 - weeksLeft;
+    if (weekNumber < 1 || weekNumber > 42) {
+      throw createHttpError(
+        400,
+        'Невірна дата пологів або вагітність вже завершена',
+      );
     }
-    const state = await MomState.findOne({ weekNumber });
+    const momState = await MomState.findOne({ weekNumber });
 
-    if (!state) {
-      return res.status(404).json({ message: `Дані для тижня ${weekNumber} не знайдені` });
+    if (!momState) {
+      throw createHttpError(404, `Дані для тижня ${weekNumber} не знайдені`);
     }
-    return res.status(200).json({ momState: state });
-
+    return res.status(200).json(momState);
   } catch (error) {
     console.error('momState error:', error);
-    return res.status(500).json({ message: 'Серверна помилка' });
+    throw createHttpError(500, 'Серверна помилка');
   }
 }

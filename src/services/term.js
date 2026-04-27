@@ -10,6 +10,6 @@ export function currentWeek(dateString) {
   const diff = new Date(dateString).getTime() - Date.now();
   const daysLeftValue = Math.max(0, Math.floor(diff / day));
   const daysPassed = totalPregnancyDays - daysLeftValue;
-  const week = Math.floor(daysPassed/7);
+  const week = Math.floor(daysPassed / 7);
   return Math.min(39, Math.max(1, week));
 }

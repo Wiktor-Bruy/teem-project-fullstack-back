@@ -1,4 +1,4 @@
-import { Note } from "../../models/note.js";
+import { Note } from '../../models/note.js';
 import createHttpError from 'http-errors';
 
 export async function updateNote(req, res) {
@@ -7,7 +7,7 @@ export async function updateNote(req, res) {
   const note = await Note.findOneAndUpdate(
     { _id: noteId, userId: req.user._id },
     req.body,
-    { returnDocument: "after" },
+    { returnDocument: 'after' },
   );
 
   if (!note) {
@@ -16,5 +16,3 @@ export async function updateNote(req, res) {
 
   res.status(200).json(note);
 }
-
-
