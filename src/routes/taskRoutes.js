@@ -5,7 +5,7 @@ import {
   createTaskSchema,
   updateStatusTaskSchema,
 } from '../validations/taskValidation.js';
-import { authenticate } from '../middleware/authenticate.js';
+import { authenticate } from '../middleware/authenticete.js';
 import { createTask } from '../controllers/task/createTask.js';
 import { getTasks } from '../controllers/task/getTasks.js';
 import { updateTaskStatus } from '../controllers/task/updateTaskStatus.js';
