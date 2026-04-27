@@ -1,5 +1,5 @@
 import { Joi, Segments } from 'celebrate';
-import { GENDER } from '../constatnts/gender';
+import { GENDER } from '../constatnts/gender.js';
 
 export const updateUserSchema = {
   [Segments.BODY]: Joi.object({
