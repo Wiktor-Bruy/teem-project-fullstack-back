@@ -1,6 +1,7 @@
 import crypto from 'crypto';
-import { FIFTEEN_MINUTES, ONE_DAY } from '../constants/time.js';
+import { FIFTEEN_MINUTES, ONE_DAY } from '../constatnts/time.js';
 import { Session } from '../models/session.js';
+import createHttpError from 'http-errors';
 
 export async function createSession(userId) {
   const accessToken = crypto.randomBytes(30).toString('base64');
@@ -35,3 +36,14 @@ export function setSessionCookies(res, session) {
     maxAge: ONE_DAY,
   });
 }
+export const logoutService = async (refreshToken) => {
+  if (!refreshToken) {
+    throw createHttpError(401, 'Refresh token is missing');
+  }
+
+  const result = await Session.deleteOne({ refreshToken });
+
+  if (result.deletedCount === 0) {
+    throw createHttpError(401, 'Session not found');
+  }
+};
