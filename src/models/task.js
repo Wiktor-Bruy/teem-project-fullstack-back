@@ -2,7 +2,7 @@ import { Schema, model } from 'mongoose';
 
 const taskSchema = new Schema(
   {
-    name: {
+    title: {
       type: String,
       required: true,
       minlength: 1,
@@ -17,7 +17,7 @@ const taskSchema = new Schema(
       type: Boolean,
       default: false,
     },
-    user: {
+    owner: {
       type: Schema.Types.ObjectId,
       ref: 'User',
       required: true,

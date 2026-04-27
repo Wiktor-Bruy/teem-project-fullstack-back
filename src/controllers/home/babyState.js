@@ -1,4 +1,4 @@
-import BabyState from '../../models/babyState.js';
+import { BabyState } from '../../models/babyState.js';
 import { getCurrentWeek } from '../../services/term.js';
 
 export const getBabyState = async (req, res, next) => {
@@ -11,13 +11,13 @@ export const getBabyState = async (req, res, next) => {
 
     const currentWeek = getCurrentWeek(new Date(user.dueDate));
 
-    const babyState = await BabyState.findOne({ week: currentWeek });
+    const babyState = await BabyState.findOne({ weekNumber: currentWeek });
 
     if (!babyState) {
       return res.status(404).json({ message: 'Baby state not found' });
     }
 
-    res.json(babyState);
+    res.status(200).json(babyState);
   } catch (error) {
     next(error);
   }
