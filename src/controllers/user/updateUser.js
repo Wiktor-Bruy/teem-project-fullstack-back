@@ -16,8 +16,7 @@ export async function updateUser(req, res, next) {
     if (email !== undefined) updateData.email = email;
 
     const updatedUser = await User.findByIdAndUpdate(userId, updateData, {
-      new: true,
-      runValidators: true,
+      returnDocument: 'after',
     });
 
     if (!updatedUser) {

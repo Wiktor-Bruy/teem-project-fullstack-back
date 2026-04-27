@@ -1,5 +1,5 @@
 import createHttpError from 'http-errors';
-import BabyState from '../models/BabyState.js';
+import { BabyState } from '../../models/babyState.js';
 
 export async function homePrivate(req, res) {
   try {

@@ -1,6 +1,6 @@
 import createHttpError from 'http-errors';
 
-import MomState from '../models/MomState.js';
+import { MomState } from '../../models/momState.js';
 
 export async function momState(req, res) {
   try {
