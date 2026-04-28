@@ -11,7 +11,7 @@ export async function homePrivate(req, res) {
     const msPerDay = 1000 * 60 * 60 * 24;
     const msPerWeek = msPerDay * 7;
 
-    const weeksLeft = Math.ceil((due - today) / msPerWeek);
+    const weeksLeft = Math.floor((due - today) / msPerWeek);
     const weekNumber = 42 - weeksLeft;
 
     const daysLeft = Math.ceil((due - today) / msPerDay);

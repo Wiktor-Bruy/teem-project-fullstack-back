@@ -3,7 +3,7 @@ import { Task } from '../../models/task.js';
 
 export async function updateTaskStatus(req, res) {
   const { taskId } = req.params;
-  const oldTask = Task.findOne({ _id: taskId, owner: req.user._id });
+  const oldTask = await Task.findOne({ _id: taskId, owner: req.user._id });
   if (!oldTask) {
     throw createHttpError(404, 'Task not found');
   }
