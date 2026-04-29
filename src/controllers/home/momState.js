@@ -1,6 +1,6 @@
 import createHttpError from 'http-errors';
 
-import MomState from '../models/MomState.js';
+import { MomState } from '../../models/momState.js';
 
 export async function momState(req, res) {
   try {
@@ -9,7 +9,7 @@ export async function momState(req, res) {
     const due = new Date(dueDate);
 
     const msPerWeek = 1000 * 60 * 60 * 24 * 7;
-    const weeksLeft = Math.ceil((due - today) / msPerWeek);
+    const weeksLeft = Math.floor((due - today) / msPerWeek);
     const weekNumber = 42 - weeksLeft;
     if (weekNumber < 1 || weekNumber > 42) {
       throw createHttpError(

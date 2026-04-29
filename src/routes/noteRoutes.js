@@ -19,7 +19,7 @@ const router = Router();
 router.get('/note', authenticate, getNotes);
 router.post('/note', authenticate, celebrate(createNoteSchema), createNote);
 router.get('/note/:noteId', authenticate, celebrate(getNoteSchema), getNote);
-router.put(
+router.patch(
   '/note/:noteId',
   authenticate,
   celebrate(updateNoteSchema),

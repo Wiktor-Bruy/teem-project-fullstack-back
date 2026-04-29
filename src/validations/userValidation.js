@@ -3,11 +3,9 @@ import { GENDER } from '../constatnts/gender.js';
 
 export const updateUserSchema = {
   [Segments.BODY]: Joi.object({
-    name: Joi.string().max(32).required(),
-    email: Joi.string().email().max(64).required(),
-    gender: Joi.string()
-      .valid(...GENDER)
-      .required(),
+    name: Joi.string().max(32),
+    email: Joi.string().email().max(64),
+    gender: Joi.string().valid(...GENDER),
     dueDate: Joi.string()
       .pattern(/^\d{4}-\d{2}-\d{2}$/)
       .custom((value, helpers) => {
@@ -17,7 +15,7 @@ export const updateUserSchema = {
         minDate.setDate(today.getDate() + 7);
 
         const maxDate = new Date();
-        maxDate.setDate(today.getDate() + 40 * 7);
+        maxDate.setDate(today.getDate() + 42 * 7);
 
         const inputDate = new Date(value);
 
@@ -26,11 +24,10 @@ export const updateUserSchema = {
         }
 
         if (inputDate > maxDate) {
-          return helpers.message('dueDate must be within 40 weeks');
+          return helpers.message('dueDate must be within 42 weeks');
         }
 
         return value;
-      })
-      .required(),
-  }),
+      }),
+  }).min(1),
 };

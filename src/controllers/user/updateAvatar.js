@@ -1,5 +1,5 @@
-import { User } from '../../models/User.js';
-import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
+import { User } from '../../models/user.js';
+import { saveFileToCloudinary } from '../../utils/saveFileToCloudinary.js';
 import createHttpError from 'http-errors';
 
 export const updateAvatar = async (req, res, next) => {

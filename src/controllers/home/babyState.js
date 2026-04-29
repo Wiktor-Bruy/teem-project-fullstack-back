@@ -1,5 +1,5 @@
 import { BabyState } from '../../models/babyState.js';
-import { getCurrentWeek } from '../../services/term.js';
+import { getCurrentWeek, daysLeft } from '../../services/term.js';
 
 export const getBabyState = async (req, res, next) => {
   try {
@@ -10,12 +10,17 @@ export const getBabyState = async (req, res, next) => {
     }
 
     const currentWeek = getCurrentWeek(new Date(user.dueDate));
+    const daysLeftTo = daysLeft(new Date(user.dueDate));
+    const currentDayOfWeek = 294 - daysLeftTo - (currentWeek - 1) * 7;
 
     const babyState = await BabyState.findOne({ weekNumber: currentWeek });
-
     if (!babyState) {
       return res.status(404).json({ message: 'Baby state not found' });
     }
+
+    const currentMomDailyTips =
+      babyState.momDailyTips[currentDayOfWeek] || 'Порада не знайдена';
+    babyState.momDailyTips = currentMomDailyTips;
 
     res.status(200).json(babyState);
   } catch (error) {

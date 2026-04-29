@@ -15,7 +15,7 @@ export const createTaskSchema = {
 
 export const updateStatusTaskSchema = {
   [Segments.PARAMS]: Joi.object({
-    id: Joi.string()
+    taskId: Joi.string()
       .custom((value, helpers) => {
         if (!mongoose.Types.ObjectId.isValid(value)) {
           return helpers.error('any.invalid');
