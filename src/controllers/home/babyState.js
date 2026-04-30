@@ -11,7 +11,7 @@ export const getBabyState = async (req, res, next) => {
 
     const currentWeek = getCurrentWeek(new Date(user.dueDate));
     const daysLeftTo = daysLeft(new Date(user.dueDate));
-    const currentDayOfWeek = 294 - daysLeftTo - (currentWeek - 1) * 7;
+    const currentDayOfWeek = 280 - daysLeftTo - (currentWeek - 1) * 7;
 
     const babyState = await BabyState.findOne({ weekNumber: currentWeek });
     if (!babyState) {

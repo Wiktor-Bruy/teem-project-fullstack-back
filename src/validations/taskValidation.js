@@ -7,6 +7,14 @@ export const createTaskSchema = {
 
     date: Joi.string()
       .pattern(/^\d{4}-\d{2}-\d{2}$/)
+      .custom((value, helpers) => {
+        const today = new Date();
+        const userDate = new Date(value);
+        if (userDate < today) {
+          return helpers.message('Date must be a min today.');
+        }
+        return value;
+      })
       .required(),
 
     isDone: Joi.boolean().optional(),

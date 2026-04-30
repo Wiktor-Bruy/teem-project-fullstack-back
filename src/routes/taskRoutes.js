@@ -12,12 +12,12 @@ import { updateTaskStatus } from '../controllers/task/updateTaskStatus.js';
 
 const router = Router();
 
-router.use('/api/tasks', authenticate);
+router.use('/tasks', authenticate);
 
-router.get('/api/tasks', getTasks);
-router.post('/api/tasks', celebrate(createTaskSchema), createTask);
+router.get('/tasks', getTasks);
+router.post('/tasks', celebrate(createTaskSchema), createTask);
 router.patch(
-  '/api/tasks/:taskId',
+  '/tasks/:taskId',
   celebrate(updateStatusTaskSchema),
   updateTaskStatus,
 );

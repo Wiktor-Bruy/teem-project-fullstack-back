@@ -10,8 +10,8 @@ export async function momState(req, res) {
 
     const msPerWeek = 1000 * 60 * 60 * 24 * 7;
     const weeksLeft = Math.floor((due - today) / msPerWeek);
-    const weekNumber = 42 - weeksLeft;
-    if (weekNumber < 1 || weekNumber > 42) {
+    const weekNumber = 40 - weeksLeft;
+    if (weekNumber < 1 || weekNumber > 40) {
       throw createHttpError(
         400,
         'Невірна дата пологів або вагітність вже завершена',

@@ -4,7 +4,7 @@ import { BabyState } from '../../models/babyState.js';
 
 export async function homePublic(req, res) {
   const currentWeek = 1;
-  const daysLeft = 294;
+  const daysLeft = 280;
 
   const baby = await BabyState.findOne({ weekNumber: currentWeek });
   if (!baby) {

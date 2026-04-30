@@ -9,8 +9,8 @@ import { momState } from '../controllers/home/momState.js';
 const router = Router();
 
 router.get('/', homePublic);
-router.get('/home', authenticate, homePrivate);
-router.get('/home/baby', authenticate, getBabyState);
-router.get('/home/mom', authenticate, momState);
+router.get('/weeks', authenticate, homePrivate);
+router.get('/weeks/baby', authenticate, getBabyState);
+router.get('/weeks/mom', authenticate, momState);
 
 export default router;

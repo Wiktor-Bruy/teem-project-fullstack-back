@@ -16,17 +16,17 @@ import { deleteNote } from '../controllers/note/deleteNote.js';
 
 const router = Router();
 
-router.get('/note', authenticate, getNotes);
-router.post('/note', authenticate, celebrate(createNoteSchema), createNote);
-router.get('/note/:noteId', authenticate, celebrate(getNoteSchema), getNote);
+router.get('/notes', authenticate, getNotes);
+router.post('/notes', authenticate, celebrate(createNoteSchema), createNote);
+router.get('/notes/:noteId', authenticate, celebrate(getNoteSchema), getNote);
 router.patch(
-  '/note/:noteId',
+  '/notes/:noteId',
   authenticate,
   celebrate(updateNoteSchema),
   updateNote,
 );
 router.delete(
-  '/note/:noteId',
+  '/notes/:noteId',
   authenticate,
   celebrate(deleteNoteSchema),
   deleteNote,

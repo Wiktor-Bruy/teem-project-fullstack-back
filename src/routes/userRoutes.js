@@ -10,18 +10,13 @@ import { updateUser } from '../controllers/user/updateUser.js';
 
 const router = Router();
 
-router.get('/user/me', authenticate, getUser);
+router.get('/users/me', authenticate, getUser);
 router.put(
-  '/user/update/avatar',
+  '/users/avatar',
   authenticate,
   upload.single('avatar'),
   updateAvatar,
 );
-router.put(
-  '/user/update',
-  authenticate,
-  celebrate(updateUserSchema),
-  updateUser,
-);
+router.put('/users', authenticate, celebrate(updateUserSchema), updateUser);
 
 export default router;

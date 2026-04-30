@@ -15,7 +15,7 @@ export const updateUserSchema = {
         minDate.setDate(today.getDate() + 7);
 
         const maxDate = new Date();
-        maxDate.setDate(today.getDate() + 42 * 7);
+        maxDate.setDate(today.getDate() + 40 * 7);
 
         const inputDate = new Date(value);
 
@@ -24,7 +24,7 @@ export const updateUserSchema = {
         }
 
         if (inputDate > maxDate) {
-          return helpers.message('dueDate must be within 42 weeks');
+          return helpers.message('dueDate must be within 40 weeks');
         }
 
         return value;

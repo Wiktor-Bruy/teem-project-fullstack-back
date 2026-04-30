@@ -12,13 +12,13 @@ export async function homePrivate(req, res) {
     const msPerWeek = msPerDay * 7;
 
     const weeksLeft = Math.floor((due - today) / msPerWeek);
-    const weekNumber = 42 - weeksLeft;
+    const weekNumber = 40 - weeksLeft;
 
     const daysLeft = Math.ceil((due - today) / msPerDay);
 
-    const currentDayOfWeek = 294 - daysLeft - (weekNumber - 1) * 7;
+    const currentDayOfWeek = 280 - daysLeft - (weekNumber - 1) * 7;
 
-    if (weekNumber < 1 || weekNumber > 42) {
+    if (weekNumber < 1 || weekNumber > 40) {
       throw createHttpError(
         400,
         'Невірна дата пологів або вагітність вже завершена',
