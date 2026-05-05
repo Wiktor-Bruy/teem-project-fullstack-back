@@ -3,13 +3,14 @@ import { getCurrentWeek, daysLeft } from '../../services/term.js';
 
 export const getBabyState = async (req, res, next) => {
   try {
+    const { week = null } = req.query;
     const user = req.user;
 
     if (!user || !user.dueDate) {
       return res.status(400).json({ message: 'No due date provided' });
     }
 
-    const currentWeek = getCurrentWeek(new Date(user.dueDate));
+    const currentWeek = week ? week : getCurrentWeek(new Date(user.dueDate));
     const daysLeftTo = daysLeft(new Date(user.dueDate));
     const currentDayOfWeek = 280 - daysLeftTo - (currentWeek - 1) * 7;
 
