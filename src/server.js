@@ -20,7 +20,24 @@ const app = express();
 const PORT = process.env.PORT ?? 3000;
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+    origin: function (origin, callback) {
+      const allowedOrigins = [
+        'http://localhost:3000',
+        'http://localhost:3001',
+        'https://teem-project-fullstack-front.vercel.app', //я добавила таку адресу якщо буде крутитись на верселі, але її можна замінити
+      ];
+
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+  }),
+);
 app.use(cookieParser());
 app.use(logger);
 
